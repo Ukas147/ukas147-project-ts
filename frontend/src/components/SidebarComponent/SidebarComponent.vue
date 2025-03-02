@@ -56,10 +56,9 @@ const closeSidebarComponent = () => {
 
 <style scoped>
 .sidebar-component {
-  position: absolute;
+  position: fixed;
   /* Largura padrão com apenas os ícones */
   transition: width 0.3s ease;
-  overflow: hidden;
   background-color: var(--dark-gray);
   width: 60px;
   height: 100vh;
@@ -78,19 +77,18 @@ const closeSidebarComponent = () => {
 }
 
 .menu-item {
-  padding: 15px;
-}
-
-.menu-item:hover {
-  transition: 0.3s ease;
-  background-color: var(--opacity-pink);
+  margin: 10px 0
 }
 
 .menu-link {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  color: inherit;
+  padding: 15px
+}
+
+.menu-item:hover {
+  transition: 0.3s ease;
+  background-color: var(--opacity-pink);
 }
 
 .text {

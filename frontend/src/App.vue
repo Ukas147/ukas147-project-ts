@@ -3,7 +3,7 @@
     <SidebarComponent />
     <div style="width: 100%; margin-left: 60px">
       <HeaderComponent />
-      <router-view style="margin: 10px 0px 10px 20px" />
+      <router-view class="router-view" />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@ import { SidebarComponent, HeaderComponent } from './components'
 import { ref } from 'vue'
 const input = ref('')
 </script>
-<style>
+<style scoped>
 #app {
   display: flex;
 }
@@ -24,5 +24,11 @@ nav {
 
 router-link {
   margin-right: 10px;
+}
+
+.router-view {
+  height: calc(100vh - 70px);
+  margin: 60px 10px 10px 10px;
+  padding: 12px
 }
 </style>

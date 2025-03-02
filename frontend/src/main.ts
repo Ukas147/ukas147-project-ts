@@ -13,6 +13,7 @@ import {
 } from "./libs/ohVueIcons";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import VueApexCharts from "vue3-apexcharts";
 
 addIcons(
   MdSpacedashboardOutlined,
@@ -26,5 +27,6 @@ const app = createApp(App);
 
 app.use(router);
 app.use(ElementPlus);
+app.use(VueApexCharts);
 app.component("v-icon", OhVueIcon);
 app.mount("#app");

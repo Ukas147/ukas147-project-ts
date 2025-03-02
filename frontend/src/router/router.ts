@@ -3,18 +3,23 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "../libs/vueRouter.ts";
-import { CreateUserPage, PageNotFound } from "../views"
+import { CreateUserPage, PageNotFound, DashboardPage } from "../views"
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "PageNotFound",
-    component: PageNotFound,
+    name: "DashboardPage",
+    component: DashboardPage,
   },
   {
     path: "/create-user",
     name: "CreateUserPage",
     component: CreateUserPage,
+  },
+  {
+    path: "/:pathMatch(.*)*", // Captura qualquer rota não definida
+    name: "PageNotFound",
+    component: PageNotFound,
   },
 ];
 
