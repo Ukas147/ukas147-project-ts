@@ -1,12 +1,11 @@
 <template>
     <div>
-        <apexchart width="380" type="donut" :options="options" :series="series"></apexchart>
+        <apexchart width="300" height="300" type="donut" :options="options" :series="series"></apexchart>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import VueApexCharts from "vue3-apexcharts";
 
 // Opções do gráfico
 const options = ref({
@@ -14,6 +13,9 @@ const options = ref({
         type: "donut"
     },
     labels: ["Categoria A", "Categoria B", "Categoria C", "Categoria D", "Categoria E"],
+    legend: {
+        position: "bottom"
+    },
     responsive: [{
         breakpoint: 480,
         options: {

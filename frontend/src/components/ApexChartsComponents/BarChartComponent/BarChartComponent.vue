@@ -1,12 +1,11 @@
 <template>
     <div>
-        <apexchart width="500" type="bar" :options="options" :series="series"></apexchart>
+        <apexchart width="300" height="300" type="bar" :options="options" :series="series"></apexchart>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import VueApexCharts from "vue3-apexcharts";
 
 const options = ref({
     chart: {

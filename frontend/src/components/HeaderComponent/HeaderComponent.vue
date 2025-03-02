@@ -19,11 +19,12 @@ import { SearchComponent } from "../../components";
 
 <style>
 .dashboard-component {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: space-between;
   width: calc(100vw - 60px);
   background-color: var(--opacity-pink);
   padding: 5px 10px;
+  overflow: hidden
 }
 </style>

@@ -1,12 +1,11 @@
 <template>
     <div id="chart">
-        <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="area" width="300" height="300" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import VueApexCharts from "vue3-apexcharts";
 
 // Dados simulados
 const monthDataSeries1 = {

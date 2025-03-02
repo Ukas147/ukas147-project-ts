@@ -1,6 +1,7 @@
 import { SidebarComponent } from "./SidebarComponent";
 import { HeaderComponent } from "./HeaderComponent";
 import { SearchComponent } from "./SearchComponent";
+import { CardComponent } from "./CardComponent"
 import {
   BarChartComponent,
   LineChartComponent,
@@ -13,6 +14,7 @@ export {
   SidebarComponent,
   HeaderComponent,
   SearchComponent,
+  CardComponent,
   BarChartComponent,
   LineChartComponent,
   AreaChartComponent,

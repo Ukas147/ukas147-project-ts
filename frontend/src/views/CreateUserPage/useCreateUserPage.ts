@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { createUser } from '../../service/User/createUser'
+import { createUser } from '../../service/api/User/createUser'
 
 export const useCreateUserPage = () => {
   const mensagem = ref('');

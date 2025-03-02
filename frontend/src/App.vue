@@ -28,7 +28,7 @@ router-link {
 
 .router-view {
   height: calc(100vh - 70px);
-  margin: 60px 10px 10px 10px;
+  margin: 40px 10px 10px 10px;
   padding: 12px
 }
 </style>

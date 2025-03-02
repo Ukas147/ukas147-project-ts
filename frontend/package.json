@@ -12,6 +12,7 @@
     "apexcharts": "^4.5.0",
     "element-plus": "^2.9.5",
     "oh-vue-icons": "^1.0.0-rc3",
+    "socket.io-client": "^4.8.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue3-apexcharts": "^1.8.0"

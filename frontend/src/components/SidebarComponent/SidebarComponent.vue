@@ -25,14 +25,14 @@
         </router-link>
       </li>
       <li class="menu-item">
-        <router-link to="/create-user" class="menu-link">
+        <router-link to="/users" class="menu-link">
           <v-icon
             style="color: var(--light-gray)"
             name="ri-settings-2-line"
             width="30"
             height="30"
           />
-          <span class="text">Configurações</span>
+          <span class="text">Usuários</span>
         </router-link>
       </li>
       <!-- Adicione mais itens conforme necessário -->

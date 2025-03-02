@@ -3,13 +3,18 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "../libs/vueRouter.ts";
-import { CreateUserPage, PageNotFound, DashboardPage } from "../views"
+import { CreateUserPage, Users, PageNotFound, DashboardPage } from "../views"
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Users,
   },
   {
     path: "/create-user",
