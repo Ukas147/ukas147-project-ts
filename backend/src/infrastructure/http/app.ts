@@ -105,15 +105,15 @@ app.get('/get-all-departments', async (req: Request, res: Response) => {
 
 app.post('/create-department', async (req: Request, res: Response) => {
   try {
-    const { name } = req.body;
-    if (!name) {
-      res.status(400).send("O nome é obrigatório!");
+    const { department } = req.body;
+    if (!department) {
+      res.status(400).send("O departamento é obrigatório!");
       return;
     }
-    const department = await addDepartmentUseCase.execute(name);
+    const varDepartment = await addDepartmentUseCase.execute(department);
     // Emite o evento para todos os clientes conectados
-    getSocket().emit('department_added', department);
-    res.json(department);
+    getSocket().emit('department_added', varDepartment);
+    res.json(varDepartment);
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).send(error.message);
@@ -127,13 +127,13 @@ app.delete('/delete-department/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!id) {
-      res.status(400).send("ID do usuário é obrigatório!");
+      res.status(400).send("ID do departamento é obrigatório!");
       return;
     }
     await deleteDepartmentUseCase.execute(parseInt(id));
     // Emite o evento para notificar a remoção
     getSocket().emit("department_deleted", { id: parseInt(id) });
-    res.send("Usuário excluído com sucesso!");
+    res.send("Departamento excluído com sucesso!");
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).send(error.message);

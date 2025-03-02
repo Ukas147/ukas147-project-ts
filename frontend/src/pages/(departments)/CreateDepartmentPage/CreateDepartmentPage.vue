@@ -2,7 +2,7 @@
   <div id="createDepartmentPage">
     <el-form :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="Cadastrar departamento">
-        <el-input v-model="form.name" placeholder="Digite o nome do departamento" />
+        <el-input v-model="form.department" placeholder="Digite o nome do departamento" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">Create</el-button>

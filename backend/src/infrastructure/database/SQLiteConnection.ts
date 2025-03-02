@@ -15,7 +15,7 @@ export function initDatabase(): void {
       `
       CREATE TABLE IF NOT EXISTS departments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
+        department TEXT NOT NULL
       )
       `,
       (err: Error | null): void => {

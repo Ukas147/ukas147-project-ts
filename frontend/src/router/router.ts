@@ -10,7 +10,7 @@ import {
   CreateDepartmentPage,
   PageNotFound,
   DashboardPage,
-} from "../views";
+} from "../pages";
 
 const routes: Array<RouteRecordRaw> = [
   {

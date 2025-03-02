@@ -27,7 +27,7 @@
     <ul v-else>
       <li v-for="user in users" :key="user.id">
         <LineComponent
-          :username="user.name"
+          :value="user.username"
           :id="user.id"
           @delete="handleDelete(user.id)"
         />

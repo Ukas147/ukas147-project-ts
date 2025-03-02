@@ -2,11 +2,11 @@ import { Department } from '../../../domain/entities/Department';
 import { DepartmentRepository } from '../../repositories/DepartmentRepository';
 
 export class AddDepartmentUseCase {
-  constructor(private userRepository: DepartmentRepository) {}
+  constructor(private departmentRepository: DepartmentRepository) {}
 
-  async execute(name: string): Promise<Department> {
-    const user = new Department(null, name);
-    const createdDepartment = await this.userRepository.create(user);
+  async execute(department: string): Promise<Department> {
+    const varDepartment = new Department(null, department);
+    const createdDepartment = await this.departmentRepository.create(varDepartment);
     return createdDepartment;
   }
 }

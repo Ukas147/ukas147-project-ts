@@ -2,7 +2,7 @@
     <div class="line-component">
         <div>
             <h3>Usuário</h3>
-            {{ username }}
+            {{ value }}
         </div>
         <el-button type="danger" :icon="Delete" circle @click="handleDelete" />
     </div>
@@ -12,7 +12,7 @@
 import { Delete } from '@element-plus/icons-vue'
 import { defineProps, defineEmits } from 'vue'
 
-defineProps<{ username: string; id: number }>();
+defineProps<{ value: string; id: number }>();
 
 const emit = defineEmits(["delete"]);
 
