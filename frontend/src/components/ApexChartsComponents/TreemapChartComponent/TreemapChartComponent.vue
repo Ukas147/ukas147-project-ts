@@ -7,24 +7,28 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Dados do gráfico
+// Lista de cidades
+const cities = [
+    "New Delhi", "Kolkata", "Mumbai", "Ahmedabad", "Bangaluru",
+    "Pune", "Chennai", "Jaipur", "Surat", "Hyderabad", "Lucknow",
+    "Indore", "Kanpur"
+];
+
+// Função para gerar um valor aleatório entre min e max
+function generateRandomValue(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Gera os dados da série para o treemap, atribuindo um valor aleatório para cada cidade
+const seriesData = cities.map(city => ({
+    x: city,
+    y: generateRandomValue(10, 250)  // ajuste os valores conforme necessário
+}));
+
+// Série do gráfico
 const series = ref([
     {
-        data: [
-            { x: "New Delhi", y: 218 },
-            { x: "Kolkata", y: 149 },
-            { x: "Mumbai", y: 184 },
-            { x: "Ahmedabad", y: 55 },
-            { x: "Bangaluru", y: 84 },
-            { x: "Pune", y: 31 },
-            { x: "Chennai", y: 70 },
-            { x: "Jaipur", y: 30 },
-            { x: "Surat", y: 44 },
-            { x: "Hyderabad", y: 68 },
-            { x: "Lucknow", y: 28 },
-            { x: "Indore", y: 19 },
-            { x: "Kanpur", y: 29 }
-        ]
+        data: seriesData
     }
 ]);
 
@@ -43,4 +47,6 @@ const chartOptions = ref({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Adicione estilos se necessário */
+</style>

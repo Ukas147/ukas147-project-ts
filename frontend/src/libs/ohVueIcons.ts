@@ -5,6 +5,7 @@ import {
   LaUserCircle,
   LaBellSolid,
   OiSearch,
+  BiHouse
 } from "oh-vue-icons/icons";
 
 export {
@@ -15,4 +16,5 @@ export {
   LaUserCircle,
   LaBellSolid,
   OiSearch,
+  BiHouse
 };

@@ -1,19 +1,40 @@
 <template>
     <div id="chart">
-        <apexchart type="area" width="300" height="300" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="area" width="900" height="300" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Dados simulados
+// Função para gerar preços com variação aleatória
+function generateRandomPrices(initial: number, days: number): number[] {
+    const prices: number[] = [];
+    let currentPrice = initial;
+    for (let i = 0; i < days; i++) {
+        // Gera uma variação entre -50 e +50 (pode ajustar conforme necessário)
+        const variation = Math.round((Math.random() - 0.5) * 100);
+        currentPrice += variation;
+        prices.push(currentPrice);
+    }
+    return prices;
+}
+
+// Função para gerar uma sequência de datas a partir de uma data inicial
+function generateDates(start: string, days: number): string[] {
+    const dates: string[] = [];
+    let currentDate = new Date(start);
+    for (let i = 0; i < days; i++) {
+        dates.push(currentDate.toISOString().split("T")[0]);
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return dates;
+}
+
+const days = 10;
 const monthDataSeries1 = {
-    prices: [8100, 8120, 8150, 8200, 8300, 8350, 8400, 8500, 8600, 8700],
-    dates: [
-        "2024-03-01", "2024-03-02", "2024-03-03", "2024-03-04", "2024-03-05",
-        "2024-03-06", "2024-03-07", "2024-03-08", "2024-03-09", "2024-03-10"
-    ]
+    prices: generateRandomPrices(8100, days),
+    dates: generateDates("2024-03-01", days)
 };
 
 // Série do gráfico
@@ -60,4 +81,6 @@ const chartOptions = ref({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Seu estilo, se necessário */
+</style>

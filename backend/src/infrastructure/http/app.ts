@@ -4,6 +4,7 @@ import { AddUserUseCase } from '../../application/usecases/AddUserUseCase';
 import { GetAllUsersUseCase } from '../../application/usecases/GetAllUsersUseCase';
 import { DeleteUserUseCase } from '../../application/usecases/DeleteUserUseCase';
 import { SQLiteUserRepository } from '../database/SQLiteUserRepository';
+import { getSocket } from '../socket';
 
 const app = express();
 const userRepository = new SQLiteUserRepository();
@@ -13,7 +14,7 @@ const getAllUsersUseCase = new GetAllUsersUseCase(userRepository);
 const deleteUserUseCase = new DeleteUserUseCase(userRepository);
 
 app.use(cors({
-  origin: 'http://ukas147.com:5173',
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +29,8 @@ app.post('/add', async (req: Request, res: Response) => {
       return;
     }
     const user = await addUserUseCase.execute(name);
-    // Se precisar emitir eventos via WebSocket, poderá fazer isso aqui (ou injetar o socket no caso de uso)
+    // Emite o evento para todos os clientes conectados
+    getSocket().emit('user_added', user);
     res.json(user);
   } catch (error) {
     if (error instanceof Error) {
@@ -62,6 +64,8 @@ app.delete('/delete-user/:id', async (req: Request, res: Response) => {
       return;
     }
     await deleteUserUseCase.execute(parseInt(id));
+    // Emite o evento para notificar a remoção
+    getSocket().emit("user_deleted", { id: parseInt(id) });
     res.send("Usuário excluído com sucesso!");
   } catch (error) {
     if (error instanceof Error) {

@@ -7,12 +7,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Opções do gráfico
+// Lista de categorias
+const categories = ["Categoria A", "Categoria B", "Categoria C", "Categoria D", "Categoria E"];
+
+// Função para gerar um valor aleatório entre min e max
+function generateRandomValue(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Gera os dados aleatórios para cada categoria
+const randomSeries = categories.map(() => generateRandomValue(10, 100));
+
 const options = ref({
     chart: {
         type: "donut"
     },
-    labels: ["Categoria A", "Categoria B", "Categoria C", "Categoria D", "Categoria E"],
+    labels: categories,
     legend: {
         position: "bottom"
     },
@@ -29,6 +39,10 @@ const options = ref({
     }]
 });
 
-// Dados do gráfico
-const series = ref([44, 55, 41, 17, 15]);
+// Dados do gráfico com valores aleatórios
+const series = ref(randomSeries);
 </script>
+
+<style scoped>
+/* Adicione estilos se necessário */
+</style>

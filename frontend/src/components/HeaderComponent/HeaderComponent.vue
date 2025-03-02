@@ -1,10 +1,8 @@
 <template>
   <div class="dashboard-component">
     <SearchComponent />
-    <div
-      style="display: flex; align-items: center; gap: 20px; padding-right: 20px"
-    >
-      <v-icon name="la-bell-solid" width="20" height="20" />
+    <div style="display: flex; align-items: center; gap: 20px; padding-right: 20px">
+      <Bell width="20" height="20" />
       <div style="display: flex; align-items: center; gap: 5px">
         <v-icon name="la-user-circle" width="30" height="30" />
         <p>Lucas Kenzo</p>

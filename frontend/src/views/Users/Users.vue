@@ -32,14 +32,11 @@ onMounted(async () => {
         error.value = "Erro ao carregar usuários";
         console.error(err);
     }
-
-    // Escutando o evento "user_added" via WebSocket
     socket.on("user_added", (newUser) => {
         console.log("Novo usuário recebido:", newUser);
         users.value.push(newUser);
     });
 
-    // Escutando o evento "user_deleted" para remover da lista automaticamente
     socket.on("user_deleted", (deletedUser) => {
         users.value = users.value.filter(user => user.id !== deletedUser.id);
     });
