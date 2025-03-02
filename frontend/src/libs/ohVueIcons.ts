@@ -5,7 +5,15 @@ import {
   LaUserCircle,
   LaBellSolid,
   OiSearch,
-  BiHouse
+  BiHouse,
+  LaUserSolid,
+  FaHeart,
+  IoEyeSharp,
+  SiTarget,
+  FaStar,
+  MdSavealtRound,
+  BiBarChartFill,
+  FaRegularBuilding
 } from "oh-vue-icons/icons";
 
 export {
@@ -16,5 +24,13 @@ export {
   LaUserCircle,
   LaBellSolid,
   OiSearch,
-  BiHouse
+  BiHouse,
+  LaUserSolid,
+  FaHeart,
+  IoEyeSharp,
+  SiTarget,
+  FaStar,
+  MdSavealtRound,
+  BiBarChartFill,
+  FaRegularBuilding
 };

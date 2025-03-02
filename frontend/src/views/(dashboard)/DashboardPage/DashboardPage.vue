@@ -55,7 +55,7 @@ import {
   AreaChartComponent,
   CircularChartComponent,
   TreemapChartComponent,
-} from "../../components";
+} from "../../../components";
 </script>
 
 <style scoped></style>

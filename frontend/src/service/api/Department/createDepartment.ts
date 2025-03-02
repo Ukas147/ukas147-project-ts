@@ -1,13 +1,13 @@
 const url = import.meta.env.VITE_API_URL
 
-export async function createUser(name: string) {
+export async function createDepartment(department: string) {
   
-  const response = await fetch(`${url}/create-user`, {
+  const response = await fetch(`${url}/create-department`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams({ name }),
+    body: new URLSearchParams({ department }),
   });
 
   return response.text();

@@ -1,12 +1,16 @@
-import { CreateUserPage } from "./CreateUserPage";
+import { CreateUserPage } from "./(users)/CreateUserPage";
 import { PageNotFound } from "./PageNotFound";
-import { DashboardPage } from './DashboardPage';
-import { Users } from './Users'
+import { DashboardPage } from './(dashboard)/DashboardPage';
+import { Users } from './(users)/Users';
+import { DepartmentsPage } from "./(departments)/DepartmentsPage"
+import { CreateDepartmentPage } from "./(departments)/CreateDepartmentPage"
 
 
 export {
     CreateUserPage,
     PageNotFound,
     DashboardPage,
-    Users
+    Users,
+    DepartmentsPage,
+    CreateDepartmentPage
 }

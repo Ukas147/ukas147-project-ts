@@ -4,16 +4,15 @@
       <el-form-item label="Cadastrar pessoa">
         <el-input v-model="form.name" placeholder="Digite o nome da pessoa" />
       </el-form-item>
+      <el-select v-model="value" placeholder="Select" size="large" style="width: 240px">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">Create</el-button>
         <el-button>Cancel</el-button>
       </el-form-item>
     </el-form>
     <p v-if="mensagem">{{ mensagem }}</p>
-
-    <el-select v-model="value" placeholder="Select" size="large" style="width: 240px">
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
   </div>
 </template>
 

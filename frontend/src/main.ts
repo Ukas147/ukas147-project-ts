@@ -10,7 +10,15 @@ import {
   LaUserCircle,
   LaBellSolid,
   OiSearch,
-  BiHouse
+  BiHouse,
+  LaUserSolid,
+  FaHeart,
+  IoEyeSharp,
+  SiTarget,
+  FaStar,
+  MdSavealtRound,
+  BiBarChartFill,
+  FaRegularBuilding
 } from "./libs/ohVueIcons";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -23,7 +31,15 @@ addIcons(
   LaUserCircle,
   LaBellSolid,
   OiSearch,
-  BiHouse
+  BiHouse,
+  LaUserSolid,
+  FaHeart,
+  IoEyeSharp,
+  SiTarget,
+  FaStar,
+  MdSavealtRound,
+  BiBarChartFill,
+  FaRegularBuilding
 );
 
 const app = createApp(App);
