@@ -9,7 +9,7 @@ import {
   CircularChartComponent,
   TreemapChartComponent,
 } from "./ApexChartsComponents";
-
+import { LineComponent } from './LineComponent'
 export {
   SidebarComponent,
   HeaderComponent,
@@ -20,4 +20,5 @@ export {
   AreaChartComponent,
   CircularChartComponent,
   TreemapChartComponent,
+  LineComponent
 };

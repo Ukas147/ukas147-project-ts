@@ -2,13 +2,11 @@
     <div>
         <h1>Lista de Usuários</h1>
 
-        <!-- Exibir mensagem de erro, se houver -->
         <p v-if="error" class="error">{{ error }}</p>
 
-        <!-- Lista de usuários -->
         <ul v-else>
             <li v-for="user in users" :key="user.id">
-                {{ user.name }}
+                <LineComponent :value="user.name" :id="user.id" @delete="handleDelete(user.id)" />
             </li>
         </ul>
     </div>
@@ -17,9 +15,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { getAllUsers } from "../../service/api/User/getAllUsers";
+import { deleteUser } from "../../service/api/User/deleteUser";
 import { io } from "socket.io-client";
+import { LineComponent } from "../../components";
 
-// URL do WebSocket (deve ser a mesma do backend)
 const socket = io(import.meta.env.VITE_API_URL);
 
 const users = ref<{ id: number; name: string }[]>([]);
@@ -37,9 +36,24 @@ onMounted(async () => {
     // Escutando o evento "user_added" via WebSocket
     socket.on("user_added", (newUser) => {
         console.log("Novo usuário recebido:", newUser);
-        users.value.push(newUser); // Atualiza a lista dinamicamente
+        users.value.push(newUser);
+    });
+
+    // Escutando o evento "user_deleted" para remover da lista automaticamente
+    socket.on("user_deleted", (deletedUser) => {
+        users.value = users.value.filter(user => user.id !== deletedUser.id);
     });
 });
+
+// Função para deletar usuário
+const handleDelete = async (id: number) => {
+    try {
+        await deleteUser(id);
+        users.value = users.value.filter(user => user.id !== id); // Remove da lista manualmente
+    } catch (err) {
+        console.error("Erro ao excluir usuário:", err);
+    }
+};
 
 // Desconectar ao desmontar o componente
 onUnmounted(() => {
