@@ -3,8 +3,7 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "../libs/vueRouter.ts";
-import CreateUserPage from "../views/CreateUserPage/CreateUserPage.vue";
-import PageNotFound from "../views/PageNotFound/PageNotFound.vue";
+import { CreateUserPage, PageNotFound } from "../views"
 
 const routes: Array<RouteRecordRaw> = [
   {

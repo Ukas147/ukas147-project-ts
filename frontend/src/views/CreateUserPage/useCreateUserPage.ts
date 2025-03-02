@@ -2,12 +2,11 @@ import { ref } from 'vue';
 import { createUser } from '../../service/User/createUser'
 
 export const useCreateUserPage = () => {
-  const nome = ref('');
   const mensagem = ref('');
 
-  const addPessoa = async () => {
+  const addPessoa = async (name: string) => {
     try {
-      const result = await createUser(nome.value)
+      const result = await createUser(name)
       mensagem.value = result
     } catch (error) {
       mensagem.value = 'Erro ao cadastrar pessoa';
@@ -15,7 +14,6 @@ export const useCreateUserPage = () => {
   };
 
   return {
-    nome,
     mensagem,
     addPessoa
   };

@@ -10,15 +10,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/add', (req: Request, res: Response): void => {
-  const { nome } = req.body;
+  const { name } = req.body;
   
-  if (!nome) {
-    res.send('O nome é obrigatório!');
+  if (!name) {
+    res.send(`O nome é obrigatório! ${JSON.stringify(req.body)}`);
     return;
   }
 
-  const sql = `INSERT INTO pessoas (nome) VALUES (?)`;
-  db.run(sql, [nome], function (this: sqlite3.Statement, err: Error | null): void {
+  const sql = `INSERT INTO users (name) VALUES (?)`;
+  db.run(sql, [name], function (this: sqlite3.Statement, err: Error | null): void {
     if (err) {
       res.send(`Erro ao cadastrar pessoa: ${err.message}`);
       return;

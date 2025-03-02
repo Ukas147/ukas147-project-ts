@@ -1,17 +1,29 @@
 <template>
   <div id="createUser">
-    <h1 style="color: var(--dark-gray)">Cadastrar Pessoa</h1>
-    <form @submit.prevent="addPessoa">
-      <label for="nome">Nome:</label>
-      <input type="text" v-model="nome" id="nome" required>
-      <button type="submit">Cadastrar</button>
-    </form>
+    <el-form :model="form" label-width="auto" style="max-width: 600px">
+    <el-form-item label="Activity name">
+      <el-input v-model="form.name" />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">Create</el-button>
+      <el-button>Cancel</el-button>
+    </el-form-item>
+  </el-form>
     <p v-if="mensagem">{{ mensagem }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
   import { useCreateUserPage } from './useCreateUserPage'
 
-  const { nome, mensagem, addPessoa } = useCreateUserPage()
+  const { mensagem, addPessoa } = useCreateUserPage()
+
+const form = reactive({
+  name: '',
+})
+
+const onSubmit = () => {
+  addPessoa(form.name)
+}
 </script>
