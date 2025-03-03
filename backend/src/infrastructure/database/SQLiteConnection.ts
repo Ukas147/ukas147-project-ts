@@ -17,7 +17,7 @@ export function initDatabase(): void {
     db.run(
       `
       CREATE TABLE IF NOT EXISTS departments (
-        id TEXT PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         label TEXT NOT NULL
       )
       `,
@@ -33,8 +33,8 @@ export function initDatabase(): void {
     db.run(
       `
       CREATE TABLE IF NOT EXISTS users (
-        id TEXT PRIMARY KEY AUTOINCREMENT,
-        label TEXT NOT NULL CHECK (LENGTH(name) <= 30),
+        id TEXT PRIMARY KEY,
+        label TEXT NOT NULL CHECK (LENGTH(label) <= 30),
         departments_id INTEGER,
         FOREIGN KEY (departments_id) REFERENCES departments(id)
       )

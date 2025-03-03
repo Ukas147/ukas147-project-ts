@@ -6,10 +6,10 @@ import { db } from './SQLiteConnection';
 export class SQLiteUserRepository implements UserRepository {
   create(user: User): Promise<User> {
     return new Promise((resolve, reject) => {
-      const sql = `INSERT INTO users (label) VALUES (?)`;
+      const sql = `INSERT INTO users (id, label) VALUES (?, ?)`;
       db.run(sql, [user.label], function (this: sqlite3.RunResult, err: Error | null) {
         if (err) return reject(err);
-        resolve(new User(String(this.lastID), user.label));
+        resolve(user);
       });
     });
   }

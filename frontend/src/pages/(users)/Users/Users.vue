@@ -22,7 +22,7 @@
 
     <ul v-else>
       <li v-for="user in users" :key="user.id">
-        <LineComponent :value="user.label" :id="user.id" @delete="handleDelete(user.id)" />
+        <LineComponent title="Usuário" :value="user.label" :id="user.id" @delete="handleDelete(user.id)" />
       </li>
     </ul>
   </div>

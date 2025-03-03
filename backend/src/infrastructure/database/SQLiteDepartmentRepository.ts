@@ -6,10 +6,10 @@ import { db } from './SQLiteConnection';
 export class SQLiteDepartmentRepository implements DepartmentRepository {
   create(department: Department): Promise<Department> {
     return new Promise((resolve, reject) => {
-      const sql = `INSERT INTO departments (label) VALUES (?)`;
-      db.run(sql, [department.label], function (this: sqlite3.RunResult, err: Error | null) {
+      const sql = `INSERT INTO departments (id, label) VALUES (?, ?)`;
+      db.run(sql, [department.id, department.label], function (this: sqlite3.RunResult, err: Error | null) {
         if (err) return reject(err);
-        resolve(new Department(String(this.lastID), department.label));
+        resolve(department);
       });
     });
   }
