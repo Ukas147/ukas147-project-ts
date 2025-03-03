@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import { Delete } from '@element-plus/icons-vue'
-import { defineProps, defineEmits } from 'vue'
+import { Delete } from '@element-plus/icons-vue';
+import { defineEmits, defineProps } from 'vue';
 
-defineProps<{ value: string; id: number }>();
+defineProps<{ id: string; value: string }>();
 
 const emit = defineEmits(["delete"]);
 

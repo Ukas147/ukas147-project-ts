@@ -1,11 +1,13 @@
+import { v4 as uuidv4 } from 'uuid';
 import { User } from '../../../domain/entities/User';
 import { UserRepository } from '../../repositories/UserRepository';
 
 export class AddUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository) { }
 
-  async execute(name: string): Promise<User> {
-    const user = new User(null, name);
+  async execute(label: string): Promise<User> {
+    const UUID = uuidv4()
+    const user = new User(UUID, label);
     const createdUser = await this.userRepository.create(user);
     return createdUser;
   }

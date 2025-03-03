@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-
-export {
+import {
     createRouter,
     createWebHistory,
-    type RouteRecordRaw
-}
+    type RouteRecordRaw,
+} from "vue-router";
+
+export { createRouter, createWebHistory, type RouteRecordRaw };

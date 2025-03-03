@@ -2,10 +2,10 @@
   <div id="createDepartmentPage">
     <el-form :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="Cadastrar departamento">
-        <el-input v-model="form.department" placeholder="Digite o nome do departamento" />
+        <el-input v-model="form.label" placeholder="Digite o nome do departamento" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
+        <el-button type="primary" @click="handleSubmit">Create</el-button>
         <el-button>Cancel</el-button>
       </el-form-item>
     </el-form>
@@ -14,18 +14,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useCreateDepartmentPage } from "./useCreateDepartmentPage";
 
 const value = ref("");
-const { mensagem, addDepartment } = useCreateDepartmentPage();
+const { mensagem, onCreateDepartment } = useCreateDepartmentPage();
 
 const form = reactive({
-  department: "",
+  label: "",
 });
 
-const onSubmit = () => {
-  addDepartment(form.department);
+const handleSubmit = () => {
+  onCreateDepartment(form.label);
 };
 </script>

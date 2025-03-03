@@ -24,23 +24,22 @@
 
         <ul v-else>
             <li v-for="department in departments" :key="department.id">
-                <LineComponent :value="department.department" :id="department.id"
-                    @delete="handleDelete(department.id)" />
+                <LineComponent :value="department.label" :id="department.id" @delete="handleDelete(department.id)" />
             </li>
         </ul>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
 import { io } from "socket.io-client";
-import { getAllDepartments } from "../../../service/api/Department/getAllDepartments";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import { deleteDepartment } from "../../../service/api/Department/deleteDepartment";
+import { getAllDepartments } from "../../../service/api/Department/getAllDepartments";
 const socket = io(import.meta.env.VITE_API_URL);
 const router = useRouter();
 const error = ref<string | null>(null);
-const departments = ref<{ id: number; department: string }[]>([]);
+const departments = ref<{ id: string; label: string }[]>([]);
 const handleCreateDepartment = () => {
     router.push("/create-department");
 };
@@ -52,7 +51,7 @@ onMounted(async () => {
         error.value = "Erro ao carregar departamentos";
         console.error(err);
     }
-    socket.on("department_added", (newDepartment) => {
+    socket.on("department_created", (newDepartment) => {
         console.log("Novo departamento recebido:", newDepartment);
         departments.value.push(newDepartment);
     });
@@ -64,7 +63,7 @@ onMounted(async () => {
     });
 });
 
-const handleDelete = async (id: number) => {
+const handleDelete = async (id: string) => {
     try {
         await deleteDepartment(id);
         departments.value = departments.value.filter(

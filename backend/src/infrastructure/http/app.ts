@@ -1,13 +1,13 @@
-import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { AddUserUseCase } from '../../application/usecases/User/AddUserUseCase';
-import { GetAllUsersUseCase } from '../../application/usecases/User/GetAllUsersUseCase';
-import { DeleteUserUseCase } from '../../application/usecases/User/DeleteUserUseCase';
+import express, { Request, Response } from 'express';
 import { AddDepartmentUseCase } from '../../application/usecases/Department/AddDepartmentUseCase';
-import { GetAllDepartmentsUseCase } from '../../application/usecases/Department/GetAllDepartmentsUseCase';
 import { DeleteDepartmentUseCase } from '../../application/usecases/Department/DeleteDepartmentUseCase';
-import { SQLiteUserRepository } from '../database/SQLiteUserRepository';
+import { GetAllDepartmentsUseCase } from '../../application/usecases/Department/GetAllDepartmentsUseCase';
+import { AddUserUseCase } from '../../application/usecases/User/AddUserUseCase';
+import { DeleteUserUseCase } from '../../application/usecases/User/DeleteUserUseCase';
+import { GetAllUsersUseCase } from '../../application/usecases/User/GetAllUsersUseCase';
 import { SQLiteDepartmentRepository } from '../database/SQLiteDepartmentRepository';
+import { SQLiteUserRepository } from '../database/SQLiteUserRepository';
 import { getSocket } from '../socket';
 
 const app = express();
@@ -48,14 +48,14 @@ app.get('/get-all-users', async (req: Request, res: Response) => {
 // Rota para adicionar usuário
 app.post('/create-user', async (req: Request, res: Response) => {
   try {
-    const { name } = req.body;
-    if (!name) {
+    const { label } = req.body;
+    if (!label) {
       res.status(400).send("O nome é obrigatório!");
       return;
     }
-    const user = await addUserUseCase.execute(name);
+    const user = await addUserUseCase.execute(label);
     // Emite o evento para todos os clientes conectados
-    getSocket().emit('user_added', user);
+    getSocket().emit('user_created', user);
     res.json(user);
   } catch (error) {
     if (error instanceof Error) {
@@ -74,9 +74,9 @@ app.delete('/delete-user/:id', async (req: Request, res: Response) => {
       res.status(400).send("ID do usuário é obrigatório!");
       return;
     }
-    await deleteUserUseCase.execute(parseInt(id));
+    await deleteUserUseCase.execute(id);
     // Emite o evento para notificar a remoção
-    getSocket().emit("user_deleted", { id: parseInt(id) });
+    getSocket().emit("user_deleted", { id: id });
     res.send("Usuário excluído com sucesso!");
   } catch (error) {
     if (error instanceof Error) {
@@ -86,8 +86,6 @@ app.delete('/delete-user/:id', async (req: Request, res: Response) => {
     }
   }
 });
-
-
 
 app.get('/get-all-departments', async (req: Request, res: Response) => {
   try {
@@ -105,15 +103,15 @@ app.get('/get-all-departments', async (req: Request, res: Response) => {
 
 app.post('/create-department', async (req: Request, res: Response) => {
   try {
-    const { department } = req.body;
-    if (!department) {
+    const { label } = req.body;
+    if (!label) {
       res.status(400).send("O departamento é obrigatório!");
       return;
     }
-    const varDepartment = await addDepartmentUseCase.execute(department);
+    const department = await addDepartmentUseCase.execute(label);
     // Emite o evento para todos os clientes conectados
-    getSocket().emit('department_added', varDepartment);
-    res.json(varDepartment);
+    getSocket().emit('department_created', department);
+    res.json(department);
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).send(error.message);
@@ -130,9 +128,9 @@ app.delete('/delete-department/:id', async (req: Request, res: Response) => {
       res.status(400).send("ID do departamento é obrigatório!");
       return;
     }
-    await deleteDepartmentUseCase.execute(parseInt(id));
+    await deleteDepartmentUseCase.execute(id);
     // Emite o evento para notificar a remoção
-    getSocket().emit("department_deleted", { id: parseInt(id) });
+    getSocket().emit("department_deleted", { id: id });
     res.send("Departamento excluído com sucesso!");
   } catch (error) {
     if (error instanceof Error) {

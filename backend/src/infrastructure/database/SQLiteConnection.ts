@@ -1,21 +1,24 @@
-import sqlite3 from 'sqlite3';
+import sqlite3 from "sqlite3";
 
-export const db = new sqlite3.Database('./src/infrastructure/database/mydatabase.db', (err: Error | null) => {
-  if (err) {
-    console.error('Erro ao abrir o banco de dados:', err.message);
-  } else {
-    console.log('Banco de dados aberto com sucesso.');
+export const db = new sqlite3.Database(
+  "./src/infrastructure/database/mydatabase.db",
+  (err: Error | null) => {
+    if (err) {
+      console.error("Erro ao abrir o banco de dados:", err.message);
+    } else {
+      console.log("Banco de dados aberto com sucesso.");
+    }
   }
-});
+);
 
 export function initDatabase(): void {
   db.serialize(() => {
-    // Cria a tabela de departments
+
     db.run(
       `
       CREATE TABLE IF NOT EXISTS departments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        department TEXT NOT NULL
+        id TEXT PRIMARY KEY AUTOINCREMENT,
+        label TEXT NOT NULL
       )
       `,
       (err: Error | null): void => {
@@ -27,14 +30,13 @@ export function initDatabase(): void {
       }
     );
 
-    // Cria a tabela de usuários com coluna departmentsId e relacionamento de chave estrangeira
     db.run(
       `
       CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL CHECK (LENGTH(name) <= 30),
-        departmentsId INTEGER,
-        FOREIGN KEY (departmentsId) REFERENCES departments(id)
+        id TEXT PRIMARY KEY AUTOINCREMENT,
+        label TEXT NOT NULL CHECK (LENGTH(name) <= 30),
+        departments_id INTEGER,
+        FOREIGN KEY (departments_id) REFERENCES departments(id)
       )
       `,
       (err: Error | null): void => {

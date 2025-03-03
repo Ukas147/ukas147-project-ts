@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { SidebarComponent, HeaderComponent } from './components'
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { HeaderComponent, SidebarComponent } from './components';
 const input = ref('')
 </script>
 <style scoped>

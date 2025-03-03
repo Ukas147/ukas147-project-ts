@@ -1,12 +1,12 @@
 import { ref } from 'vue';
-import { createDepartment } from '../../../service/api/Department/createDepartment'
+import { createDepartment } from '../../../service/api/Department/createDepartment';
 
 export const useCreateDepartmentPage = () => {
   const mensagem = ref('');
 
-  const addDepartment = async (department: string) => {
+  const onCreateDepartment = async (label: string) => {
     try {
-      const result = await createDepartment(department)
+      const result = await createDepartment(label)
       mensagem.value = result
     } catch (error) {
       mensagem.value = 'Erro ao cadastrar departamento';
@@ -15,6 +15,6 @@ export const useCreateDepartmentPage = () => {
 
   return {
     mensagem,
-    addDepartment
+    onCreateDepartment
   };
 }

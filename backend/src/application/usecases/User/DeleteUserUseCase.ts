@@ -1,9 +1,9 @@
 import { UserRepository } from '../../repositories/UserRepository';
 
 export class DeleteUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository) { }
 
-  async execute(id: number): Promise<void> {
+  async execute(id: string): Promise<void> {
     return await this.userRepository.delete(id);
   }
 }

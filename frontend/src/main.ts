@@ -1,45 +1,46 @@
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 import { createApp } from "vue";
-import "./global.css";
-import App from "./App.vue";
-import router from "./router/router";
-import {
-  OhVueIcon,
-  addIcons,
-  MdSpacedashboardOutlined,
-  RiSettings2Line,
-  LaUserCircle,
-  LaBellSolid,
-  OiSearch,
-  BiHouse,
-  LaUserSolid,
-  FaHeart,
-  IoEyeSharp,
-  SiTarget,
-  FaStar,
-  MdSavealtRound,
-  BiBarChartFill,
-  FaRegularBuilding
-} from "./libs/ohVueIcons";
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 import VueApexCharts from "vue3-apexcharts";
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import App from "./App.vue";
+import "./global.css";
+import {
+  addIcons,
+  BiBarChartFill,
+  BiHouse,
+  FaHeart,
+  FaRegularBuilding,
+  FaStar,
+  IoEyeSharp,
+  LaBellSolid,
+  LaUserCircle,
+  LaUserSolid,
+  MdSavealtRound,
+  MdSpacedashboardOutlined,
+  OhVueIcon,
+  OiSearch,
+  RiSettings2Line,
+  SiTarget
+} from "./libs/ohVueIcons";
+import router from "./router/router";
 
 addIcons(
-  MdSpacedashboardOutlined,
-  RiSettings2Line,
-  LaUserCircle,
-  LaBellSolid,
-  OiSearch,
-  BiHouse,
-  LaUserSolid,
-  FaHeart,
-  IoEyeSharp,
-  SiTarget,
-  FaStar,
-  MdSavealtRound,
   BiBarChartFill,
-  FaRegularBuilding
+  BiHouse,
+  FaHeart,
+  FaRegularBuilding,
+  FaStar,
+  IoEyeSharp,
+  LaBellSolid,
+  LaUserCircle,
+  LaUserSolid,
+  MdSavealtRound,
+  MdSpacedashboardOutlined,
+  OhVueIcon,
+  OiSearch,
+  RiSettings2Line,
+  SiTarget
 );
 
 const app = createApp(App);
