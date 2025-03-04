@@ -48,12 +48,12 @@ app.get('/get-all-users', async (req: Request, res: Response) => {
 // Rota para adicionar usuário
 app.post('/create-user', async (req: Request, res: Response) => {
   try {
-    const { label } = req.body;
-    if (!label) {
-      res.status(400).send("O nome é obrigatório!");
+    const { label, departments_id  } = req.body;
+    if (!label || !departments_id ) {
+      res.status(400).send("Nome e departamento são obrigatórios!");
       return;
     }
-    const user = await addUserUseCase.execute(label);
+    const user = await addUserUseCase.execute(label, departments_id);
     // Emite o evento para todos os clientes conectados
     getSocket().emit('user_created', user);
     res.json(user);

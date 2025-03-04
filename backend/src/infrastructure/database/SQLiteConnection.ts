@@ -18,7 +18,7 @@ export function initDatabase(): void {
       `
       CREATE TABLE IF NOT EXISTS departments (
         id TEXT PRIMARY KEY,
-        label TEXT NOT NULL
+        label TEXT NOT NULL CHECK (LENGTH(label) <= 30)
       )
       `,
       (err: Error | null): void => {

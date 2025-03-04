@@ -22,7 +22,8 @@
 
     <ul v-else>
       <li v-for="user in users" :key="user.id">
-        <LineComponent title="Usuário" :value="user.label" :id="user.id" @delete="handleDelete(user.id)" />
+        <LineComponent title="Usuário" :value="user.departments_label" :id="user.id"
+          @delete="handleDelete(user.id)" />
       </li>
     </ul>
   </div>
@@ -38,7 +39,12 @@ import { getAllUsers } from "../../../service/api/User/getAllUsers";
 
 const socket = io(import.meta.env.VITE_API_URL);
 const router = useRouter();
-const users = ref<{ id: string; label: string }[]>([]);
+const users = ref<{
+  id: string;
+  label: string;
+  department_id: string;
+  departments_label: string
+}[]>([]);
 const error = ref<string | null>(null);
 
 // Buscar usuários ao montar o componente

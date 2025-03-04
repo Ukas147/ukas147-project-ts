@@ -4,8 +4,18 @@
       <el-form-item label="Cadastrar pessoa">
         <el-input v-model="form.label" placeholder="Digite o nome da pessoa" />
       </el-form-item>
-      <el-select v-model="value" placeholder="Select" size="large" style="width: 240px">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+      <el-select
+        v-model="form.departments_id"
+        placeholder="Select"
+        size="large"
+        style="width: 240px"
+      >
+        <el-option
+          v-for="item in departments_list"
+          :key="item.id"
+          :label="item.label"
+          :value="item.id"
+        />
       </el-select>
       <el-form-item>
         <el-button type="primary" @click="handleSubmit">Create</el-button>
@@ -17,40 +27,54 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useCreateUserPage } from './useCreateUserPage'
+import { io } from "socket.io-client";
+import { reactive, onMounted, onUnmounted, ref } from "vue";
+import { createUser } from '../../../service/api/User/createUser';
+import { getAllDepartments } from "../../../service/api/Department/getAllDepartments";
 
-const value = ref('')
-const { mensagem, onCreateUser } = useCreateUserPage()
-
-const form = reactive({
-  label: '',
-})
-
-const handleSubmit = () => {
-  onCreateUser(form.label)
+interface User {
+  label: string;
+  departments_id: string
 }
 
-const options = [
-  {
-    value: 'Option1',
-    label: 'Option1',
-  },
-  {
-    value: 'Option2',
-    label: 'Option2',
-  },
-  {
-    value: 'Option3',
-    label: 'Option3',
-  },
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-  {
-    value: 'Option5',
-    label: 'Option5',
-  },
-]
+const error = ref<string | null>(null);
+const socket = io(import.meta.env.VITE_API_URL);
+const departments_list = ref<{ id: string; label: string }[]>([]);
+
+const form = reactive({
+  label: "",
+  departments_id: ""
+});
+
+const mensagem = ref('');
+
+const handleSubmit = () => {
+  onCreateUser(form);
+};
+
+const onCreateUser = async (form: User) => {
+  try {
+    const result = await createUser(form)
+    mensagem.value = result
+  } catch (error) {
+    mensagem.value = 'Erro ao cadastrar pessoa';
+  }
+};
+
+onMounted(async () => {
+  try {
+    departments_list.value = await getAllDepartments();
+  } catch (err) {
+    error.value = "Erro ao carregar departamentos";
+    console.error(err);
+  }
+  socket.on("department_created", (newDepartment) => {
+    console.log("Novo departamento recebido:", newDepartment);
+    departments_list.value.push(newDepartment);
+  });
+});
+
+onUnmounted(() => {
+  socket.disconnect();
+});
 </script>

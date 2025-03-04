@@ -23,7 +23,7 @@
     <p v-if="error" class="error">{{ error }}</p>
 
     <ul v-else>
-      <li v-for="department in departments" :key="department.id">
+      <li v-for="department in departments_list" :key="department.id">
         <LineComponent title="Departamento" :value="department.label" :id="department.id" @delete="handleDelete(department.id)" />
       </li>
     </ul>
@@ -40,25 +40,25 @@ import { getAllDepartments } from "../../../service/api/Department/getAllDepartm
 const socket = io(import.meta.env.VITE_API_URL);
 const router = useRouter();
 const error = ref<string | null>(null);
-const departments = ref<{ id: string; label: string }[]>([]);
+const departments_list = ref<{ id: string; label: string }[]>([]);
 const handleCreateDepartment = () => {
   router.push("/create-department");
 };
 
 onMounted(async () => {
   try {
-    departments.value = await getAllDepartments();
+    departments_list.value = await getAllDepartments();
   } catch (err) {
     error.value = "Erro ao carregar departamentos";
     console.error(err);
   }
   socket.on("department_created", (newDepartment) => {
     console.log("Novo departamento recebido:", newDepartment);
-    departments.value.push(newDepartment);
+    departments_list.value.push(newDepartment);
   });
 
   socket.on("department_deleted", (deletedDepartment) => {
-    departments.value = departments.value.filter(
+    departments_list.value = departments_list.value.filter(
       (department) => department.id !== deletedDepartment.id
     );
   });
@@ -67,7 +67,7 @@ onMounted(async () => {
 const handleDelete = async (id: string) => {
   try {
     await deleteDepartment(id);
-    departments.value = departments.value.filter(
+    departments_list.value = departments_list.value.filter(
       (department) => department.id !== id
     );
   } catch (err) {
