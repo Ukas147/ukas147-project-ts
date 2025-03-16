@@ -1,0 +1,37 @@
+version: '3'
+services:
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend/src:/app/src  # Monta a pasta src para hot reload
+    ports:
+      - "5173:5173"  # Porta do Vite
+    environment:
+      - VITE_API_URL=http://localhost:3000  # Comunicação com o backend
+  
+  # Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend/src:/app/src  # Monta a pasta src para hot reload
+    ports:
+      - "3000:3000"  # Porta do backend
+    depends_on:
+      - db  # O backend depende do banco de dados (caso tenha)
+  
+  # Banco de Dados Service (Exemplo com PostgreSQL)
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+# Volumes persistentes para o banco de dados
+volumes:
+  db_data:  
