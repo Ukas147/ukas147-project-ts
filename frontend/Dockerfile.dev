@@ -1,0 +1,14 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copia e instala dependências
+COPY package*.json ./
+RUN npm install
+
+# Copia todo o código (inicialmente)
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]
